@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+
+.main
+{
+    background-color:#0d1116;
+    margin-bottom: 0;
+}
+
+.topnav
+{
+    background-color:#0d1116;    
+}
+
+.titletext {
+    background: -webkit-linear-gradient(left, #60c657 30%, #35aee2 60%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-size: 50px;
+}
+
+.displaynfts{
+
+    /*grid-template-columns: repeat(4, minmax(0, 1fr)); */
+    grid-gap: 120px; 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    display: grid;
+    padding-left: 80px;
+    text-align: center;
+
+}
+
+.displaynfts a
+{
+    color: rgb(255, 255, 255); /* blue colors for links too */
+  
+}
+
+.displaynfts p
+{
+    color: rgb(255, 255, 255); /* blue colors for links too */
+  
+}

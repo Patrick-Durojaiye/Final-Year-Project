@@ -1,0 +1,44 @@
+
+.main
+{
+    display: flex;
+    justify-content: center;
+}
+
+.formpart
+{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 3rem;
+}
+
+.formpart h1
+{
+    color: white;
+    text-align: center;
+}
+
+.formpart p
+{
+    color: white;
+}
+
+
+.tokenidinput
+{
+    color: black;
+    text-align: center;
+    height: 35px;
+    border-radius: 0.25rem;
+    
+}
+
+.priceinput
+{
+    color: black;
+    height: 35px;
+    margin-top: 0.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 20px;
+}
