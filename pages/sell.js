@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
 import styles from "../styles/sellpage.module.css"
 
-const nftaddress = "0xCA61925Dd2fceA4BeA5B3F095BFEfE8C531AaF58"
-const nftmarketaddress = "0xbAf7E2F0c88988263748C817f42F9cb4e9D8A593"
+const nftaddress = "0x7766accE6883D302AA1cab19264aACa02607dc49"
+const nftmarketaddress = "0x046f73556324909976CD47E949b9cb8C288Dc6Dc"
 import NFT from '../artifacts/contracts/IoTDataNFT.sol/IoTDataNFT.json'
 import Market from '../artifacts/contracts/Marketplace.sol/Marketplace.json'
 
@@ -24,12 +24,12 @@ export default function sellData() {
         let contract = null
         contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
         const nftid = await document.getElementById("idtokenid").value
-
+        console.log("id: " + nftid)
         // Gets price from input 
         const price = ethers.utils.parseEther(await document.getElementById("priceid").value)
-
+        console.log(price.toString())
         // Calls the contract to sell the NFT data on the marketplace
-        let transaction = await contract.createOrder(price.toString(), nftaddress, nftid, { value: price })
+        let transaction = await contract.createOrder(price.toString(), nftaddress, nftid)
         await transaction.wait()
         router.push('/')
     }
@@ -75,7 +75,7 @@ export default function sellData() {
                 <button onClick={createSale}>
                     Sell NFT
                 </button>
-
+                <p>{"\n"}</p>
                 <button onClick={approveNFT}> Appprove NFT </button>
             </div>
         </div>

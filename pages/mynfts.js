@@ -81,10 +81,10 @@ export default function MyNfts() {
         // Displays decrypted data
         decryptmessage.innerHTML = decrypted.toString(CryptoJS.enc.Utf8);
     }
-    if (loadingState === 'loaded' && !nfts.length) return (<h1>No items in marketplace</h1>)
+    if (loadingState === 'loaded' && !nfts.length) return (<h1>You Don't Own Any Data </h1>)
     return (
         <div className={styles.lol}>
-            <div className="px-4" style={{ maxWidth: 'auto', paddingLeft: '70px' }}>
+            <div style={{ maxWidth: 'auto', paddingLeft: '70px' }}>
                 <div className={styles.displaynfts}>
                     {
                         nfts.map((nft, i) => (

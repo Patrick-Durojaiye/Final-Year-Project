@@ -37,20 +37,20 @@ export default function Cancel() {
         <div className={styles.main}>
 
             <div className={styles.formpart}>
-                <h1> Sell Your Data </h1>
-                <p> To sell your data please input the Token Id representing your data as a NFT and include the price in Ether you want to sell it for </p>
+                <h1> Canel Your Data </h1>
+                <p> To cancel your data please input the order Id of your data listing </p>
                 {/* Input to get order Id to cancel NFT data listing */}
                 <input
                     id="orderid"
                     placeholder="Order ID"
                     className={styles.orderidinput}
                 />
-
-                <button onClick={cancelSale}>
-                    Create Digital Asset
+                <p>{"\n"}</p>
+                < button onClick={cancelSale}>
+                    Cancel Listing
                 </button>
 
             </div>
-        </div>
+        </div >
     )
 }

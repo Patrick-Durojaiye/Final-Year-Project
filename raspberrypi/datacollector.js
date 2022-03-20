@@ -96,18 +96,20 @@ const runMain = async () => {
 
         encryptionfunc();
 
-        var loool = [{ deviceId: "0x2Dc36eB34735D5d25f804f71A9aF01c7A53BA4ca" }];
+        var dt = [{ deviceId: "0x2Dc36eB34735D5d25f804f71A9aF01c7A53BA4ca" }];
 
-        var loool = {
+        var dt = {
             name: "raspberrypi",
             deviceId: "0x2Dc36eB34735D5d25f804f71A9aF01c7A53BA4ca",
+            description: 'Temperature and Humidity data, collected using DHT11',
+            location: 'Ireland',
             image: "https://ipfs.infura.io/ipfs/QmSRQco3rDB6PQxmeXzH7ibxkZPCChUFqtw56SNg2dLNJD"
         }
 
-        loool.data = encryptionfunc();
+        dt.data = encryptionfunc();
         console.log("----");
-        console.log(loool);
-        tmp = JSON.stringify(loool);
+        console.log(dt);
+        tmp = JSON.stringify(dt);
         ipfsupload(tmp);
 
     }

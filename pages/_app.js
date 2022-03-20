@@ -5,9 +5,8 @@ import Link from 'next/link'
 function Navagation({ Component, pageProps }) {
     return (
         <div className={styles.topnav}>
-            <nav className="border-b p-6">
+            <nav>
                 <p className={styles.titletext}>IoT Data Marketplace</p>
-                <br></br>
                 {/* Navagation Items */}
                 <div className={styles.navitems}>
                     <Link href="/">
@@ -34,7 +33,6 @@ function Navagation({ Component, pageProps }) {
 
                 </div>
             </nav>
-            <br></br>
             <Component {...pageProps} />
         </div >
     )

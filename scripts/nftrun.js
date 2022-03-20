@@ -17,9 +17,10 @@ const nftContract = new hre.ethers.Contract(CONTRACT_ADDRESS, contract.abi, sign
 const main = async () => {
 
     console.log("Minting.....");
-    const txs = await nftContract.mintdataNFT("newmarketplacetest");
+    const txs = await nftContract.mintdataNFT("QmafW2n1QKJjn6EVdFJ8N1QkAQEnXtKj4aEJJQLgmKJ69D");
+    //const txs = await nftContract.addToWhitelist("0x2Dc36eB34735D5d25f804f71A9aF01c7A53BA4ca")
     console.log(txs);
-
+    console.log("minted");
 };
 
 const runMain = async () => {

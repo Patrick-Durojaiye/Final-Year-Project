@@ -14,9 +14,64 @@ import Market from '../artifacts/contracts/Marketplace.sol/Marketplace.json'
 export default function Homepage() {
     const [nfts, setNfts] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded')
+    const [currentAccount, setCurrentAccount] = useState("")
     useEffect(() => {
-        displayNFTs()
+        // displayNFTs()
+        checkIfWalletIsConnected();
     }, [])
+
+
+    const checkIfWalletIsConnected = async () => {
+        const { ethereum } = window;
+
+        if (!ethereum) {
+            console.log("Make sure you have metamask!");
+            return;
+        } else {
+            console.log("We have the ethereum object", ethereum);
+            displayNFTs();
+        }
+
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
+
+        if (accounts.length !== 0) {
+            const account = accounts[0];
+            console.log("Found an authorized account:", account);
+            setCurrentAccount(account)
+        } else {
+            console.log("No authorized account found")
+        }
+    }
+
+    const connectWallet = async () => {
+        try {
+            const { ethereum } = window;
+
+            if (!ethereum) {
+                alert("Get MetaMask!");
+                return;
+            }
+
+            const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+
+            console.log("Connected", accounts[0]);
+            setCurrentAccount(accounts[0]);
+            displayNFTs()
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const renderNotConnectedContainer = () => (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {'\n'}
+            <button onClick={connectWallet}>
+                Connect to Wallet
+            </button>
+
+        </div>
+    );
     async function displayNFTs() {
 
         const web3Modal = new Web3Modal()
@@ -44,6 +99,8 @@ export default function Homepage() {
                 possessor,
                 tokenId: i.tokenId.toNumber(),
                 datamakerID: meta.data.deviceId,
+                description: meta.data.description,
+                location: meta.data.location,
                 orderingid,
                 image: meta.data.image,
                 tokenUri
@@ -78,28 +135,34 @@ export default function Homepage() {
     return (
         <div className={styles.main}>
             <div style={{ maxWidth: 'auto', paddingLeft: '70px' }}>
-                <div className={styles.displaynfts}>
-                    {
-                        nfts.map((nft, i) => (
-                            // Gets individual NFT items and displays the information relating to it 
-                            <div key={i}>
-                                <img src={nft.image} />
-                                <div>
-                                    <p> Device Id: {nft.datamakerID}</p>
-                                    <p> Owner of Data: {nft.possessor} </p>
-                                    <p> Data: {nft.tokenUri} </p>
-                                    <p> Token Id: {nft.tokenId} </p>
-                                    <p>Order Id: {nft.orderingid}</p>
-                                    <p>{nft.price} ETH</p>
-                                    <a href={"https://rinkeby.etherscan.io/token/0x7766accE6883D302AA1cab19264aACa02607dc49?a=" + nft.tokenId} target="_blank" rel="noopener noreferrer"> View on Etherscan </a>
-                                    <p>{"\n"}</p>
-                                    <button onClick={() => buyNft(nft)}>Buy</button>
-                                    <p>{"\n"}</p>
+                {currentAccount === "" ? (
+                    renderNotConnectedContainer()
+                ) : (
+                    <div className={styles.displaynfts}>
+                        {
+                            nfts.map((nft, i) => (
+                                // Gets individual NFT items and displays the information relating to it 
+                                <div key={i}>
+                                    <img src={nft.image} />
+                                    <div>
+                                        <p> Device Id: {nft.datamakerID}</p>
+                                        <p> Owner of Data: {nft.possessor} </p>
+                                        <p> Description: {nft.description}</p>
+                                        <p> Location: {nft.location}</p>
+                                        <p> Data: {nft.tokenUri} </p>
+                                        <p> Token Id: {nft.tokenId} </p>
+                                        <p>Order Id: {nft.orderingid}</p>
+                                        <p>{nft.price} ETH</p>
+                                        <a href={"https://rinkeby.etherscan.io/token/0x7766accE6883D302AA1cab19264aACa02607dc49?a=" + nft.tokenId} target="_blank" rel="noopener noreferrer"> View on Etherscan </a>
+                                        <p>{"\n"}</p>
+                                        <button onClick={() => buyNft(nft)}>Buy</button>
+                                        <p>{"\n"}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))
-                    }
-                </div>
+                            ))
+                        }
+                    </div>
+                )}
             </div>
         </div >
     )

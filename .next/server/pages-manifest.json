@@ -1,5 +1,10 @@
 {
   "/_app": "pages/_app.js",
+  "/cancel": "pages/cancel.html",
+  "/": "pages/index.html",
+  "/mynfts": "pages/mynfts.html",
+  "/sell": "pages/sell.html",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js"
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
 }
